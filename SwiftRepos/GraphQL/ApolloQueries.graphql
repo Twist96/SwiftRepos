@@ -1,0 +1,17 @@
+query SearchRepository($query: String!, $type: SearchType!, $first: Int $after: String){
+	search(query: $query, type: $type, first: $first, after: $after) {
+		repositoryCount
+		edges {
+			node {
+				... on Repository {
+					id
+					name
+					owner {
+						login
+					}
+					stargazerCount
+					forkCount }
+			}cursor
+		}
+	}
+}
