@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D87E676-1DAE-4D45-A23C-4083B5DEFA48"
+            uuid = "A68BCFCF-6BF5-4CED-A958-C2387809657B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftRepos/Views/HomeView.swift"
+            filePath = "SwiftRepos/Database/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "saveAllItems(_:dataController:manageContext:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "deletePersistantStore()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

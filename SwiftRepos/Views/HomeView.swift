@@ -9,14 +9,14 @@ import SwiftUI
 import CoreData
 import Apollo
 
-let gitToken = "c519335bd1cce2b9a9b0b5dfe290b94e5a58a074"
+let gitToken = "a56e62f01f6d2d28c9fa2c00f15e07ff6fa879d9"
 
 struct HomeView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     @StateObject var viewModel = HomeViewModel()
     @FetchRequest(entity: Repository.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stargazerCount, ascending: false)])
+                  sortDescriptors: [])
         var repositories: FetchedResults<Repository>
     
     var body: some View {
@@ -95,12 +95,23 @@ class HomeViewModel: ObservableObject{
     func saveAllItems(_ graphQLRepo: [SearchRepositoryQuery.Data.Search.Edge?],
                       dataController: DataController,
                       manageContext: NSManagedObjectContext){
-        
         if refreshId == nil {
+            //Clear after for every possible old data
             dataController.deleteAll()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
+            }
+        }else{
+            convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
         }
         lastRepoCusor = graphQLRepo.last!!.cursor
         refreshId = graphQLRepo[19]?.node!.asRepository!.id
+        
+    }
+    
+    func convertToRepositoryAndSave(_ graphQLRepo: [SearchRepositoryQuery.Data.Search.Edge?],
+                        dataController: DataController,
+                        manageContext: NSManagedObjectContext){
         for repo in graphQLRepo{
             let repository = Repository(context: manageContext)
             repository.id = repo!.node!.asRepository!.id

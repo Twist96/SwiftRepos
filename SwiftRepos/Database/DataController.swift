@@ -12,6 +12,8 @@ class DataController:ObservableObject{
     
     let container: NSPersistentContainer
     static let instance = DataController()
+    private var dbStoreURL: URL? = nil
+    private var dbStoreType: String? = nil
     
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "Main")
@@ -24,6 +26,8 @@ class DataController:ObservableObject{
             if let error = error{
                 fatalError("Fatal error loading store: \(error.localizedDescription)")
             }
+            self.dbStoreURL = storeDescription.url
+            self.dbStoreType = storeDescription.type
         }
     }
     
@@ -53,6 +57,15 @@ class DataController:ObservableObject{
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Repository.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? container.viewContext.execute(deleteRequest)
+    }
+    
+    func deletePersistantStore(){
+        do{
+            
+            try container.persistentStoreCoordinator.destroyPersistentStore(at: dbStoreURL!, ofType: dbStoreType!)
+        }catch{
+            print(error.localizedDescription)
+        }
     }
     
     func dummyRepo(){
