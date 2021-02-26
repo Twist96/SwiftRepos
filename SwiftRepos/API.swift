@@ -61,8 +61,13 @@ public final class SearchRepositoryQuery: GraphQLQuery {
       search(query: $query, type: $type, first: $first, after: $after) {
         __typename
         repositoryCount
+        pageInfo {
+          __typename
+          hasNextPage
+        }
         edges {
           __typename
+          cursor
           node {
             __typename
             ... on Repository {
@@ -136,6 +141,7 @@ public final class SearchRepositoryQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("repositoryCount", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("pageInfo", type: .nonNull(.object(PageInfo.selections))),
           GraphQLField("edges", type: .list(.object(Edge.selections))),
         ]
       }
@@ -146,8 +152,8 @@ public final class SearchRepositoryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(repositoryCount: Int, edges: [Edge?]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "SearchResultItemConnection", "repositoryCount": repositoryCount, "edges": edges.flatMap { (value: [Edge?]) -> [ResultMap?] in value.map { (value: Edge?) -> ResultMap? in value.flatMap { (value: Edge) -> ResultMap in value.resultMap } } }])
+      public init(repositoryCount: Int, pageInfo: PageInfo, edges: [Edge?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "SearchResultItemConnection", "repositoryCount": repositoryCount, "pageInfo": pageInfo.resultMap, "edges": edges.flatMap { (value: [Edge?]) -> [ResultMap?] in value.map { (value: Edge?) -> ResultMap? in value.flatMap { (value: Edge) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -169,6 +175,16 @@ public final class SearchRepositoryQuery: GraphQLQuery {
         }
       }
 
+      /// Information to aid in pagination.
+      public var pageInfo: PageInfo {
+        get {
+          return PageInfo(unsafeResultMap: resultMap["pageInfo"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "pageInfo")
+        }
+      }
+
       /// A list of edges.
       public var edges: [Edge?]? {
         get {
@@ -179,14 +195,13 @@ public final class SearchRepositoryQuery: GraphQLQuery {
         }
       }
 
-      public struct Edge: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["SearchResultItemEdge"]
+      public struct PageInfo: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["PageInfo"]
 
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("node", type: .object(Node.selections)),
-            GraphQLField("cursor", type: .nonNull(.scalar(String.self))),
+            GraphQLField("hasNextPage", type: .nonNull(.scalar(Bool.self))),
           ]
         }
 
@@ -196,8 +211,8 @@ public final class SearchRepositoryQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(node: Node? = nil, cursor: String) {
-          self.init(unsafeResultMap: ["__typename": "SearchResultItemEdge", "node": node.flatMap { (value: Node) -> ResultMap in value.resultMap }, "cursor": cursor])
+        public init(hasNextPage: Bool) {
+          self.init(unsafeResultMap: ["__typename": "PageInfo", "hasNextPage": hasNextPage])
         }
 
         public var __typename: String {
@@ -209,13 +224,45 @@ public final class SearchRepositoryQuery: GraphQLQuery {
           }
         }
 
-        /// The item at the end of the edge.
-        public var node: Node? {
+        /// When paginating forwards, are there more items?
+        public var hasNextPage: Bool {
           get {
-            return (resultMap["node"] as? ResultMap).flatMap { Node(unsafeResultMap: $0) }
+            return resultMap["hasNextPage"]! as! Bool
           }
           set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "node")
+            resultMap.updateValue(newValue, forKey: "hasNextPage")
+          }
+        }
+      }
+
+      public struct Edge: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["SearchResultItemEdge"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("cursor", type: .nonNull(.scalar(String.self))),
+            GraphQLField("node", type: .object(Node.selections)),
+            GraphQLField("cursor", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(cursor: String, node: Node? = nil) {
+          self.init(unsafeResultMap: ["__typename": "SearchResultItemEdge", "cursor": cursor, "node": node.flatMap { (value: Node) -> ResultMap in value.resultMap }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
           }
         }
 
@@ -226,6 +273,16 @@ public final class SearchRepositoryQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "cursor")
+          }
+        }
+
+        /// The item at the end of the edge.
+        public var node: Node? {
+          get {
+            return (resultMap["node"] as? ResultMap).flatMap { Node(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "node")
           }
         }
 

@@ -27,6 +27,18 @@ class DataController:ObservableObject{
         }
     }
     
+    static var preview: DataController = {
+       let dataController = DataController()
+        
+//        do{
+//            try dataController.createSampleData()
+//        }catch{
+//            fatalError("Fatel error creating preview: \(error.localizedDescription)")
+//        }
+        
+        return dataController
+    }()
+    
     func save() {
         if container.viewContext.hasChanges{
             try? container.viewContext.save()

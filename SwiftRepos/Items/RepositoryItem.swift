@@ -29,7 +29,7 @@ struct RepositoryItem: View {
                     }
                     HStack(spacing: 2) {
                         Image(systemName: "arrow.triangle.branch")
-                        Text(Int(repository.stargazerCount).withCommas())
+                        Text(Int(repository.forkCount).withCommas())
                     }
                 }
                 .font(.footnote)
