@@ -9,15 +9,22 @@ import SwiftUI
 import CoreData
 import Apollo
 
-let gitToken = "1a9b7fbe4739103b2075122e45413003607cd44e"
+let gitToken = "<GITHUB_TOKEN>"
 
 struct HomeView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
-    @StateObject var viewModel = HomeViewModel()
     @FetchRequest(entity: Repository.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stargazerCount, ascending: false)])
         var repositories: FetchedResults<Repository>
+    
+    @StateObject var viewModel: HomeViewModel
+
+    
+    init() {
+        let homeViewModel = HomeViewModel()
+        _viewModel = StateObject(wrappedValue: homeViewModel)
+    }
     
     
     var body: some View {

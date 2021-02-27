@@ -77,7 +77,7 @@ class HomeViewModel: ObservableObject{
     
     
     /// Save All Repositories
-    /// If this function is called for the first time, clear database
+    /// existing repositories will be updated
     /// - Parameters:
     ///   - graphQLRepo: Repository list
     ///   - dataController: DataController
@@ -85,19 +85,10 @@ class HomeViewModel: ObservableObject{
     func saveAllRepositories(_ graphQLRepo: [SearchRepositoryQuery.Data.Search.Edge?],
                       dataController: DataController,
                       manageContext: NSManagedObjectContext){
-        if refreshId == nil {
-            ///Clear database
-            dataController.deletePersistantStore()
-            ///Wait for three seconds to allow delete operation end before adding new data.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
-            }
-        }else{
-            convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
-        }
         if let repo = graphQLRepo[19]{
             refreshId = repo.node!.asRepository!.id
         }
+        convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
     }
     
     
