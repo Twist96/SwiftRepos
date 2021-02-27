@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ErrorPageView: View {
     let errorMessage: String
+    var message: String{
+        if errorMessage.contains("401"){
+            return "Bad credentials. Please refreash your token"
+        }else{
+            return errorMessage
+        }
+    }
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: "exclamationmark.icloud.fill")
                 .font(.system(size: 42, weight: .bold))
-            Text(errorMessage)
+            Text(message)
                 .font(.callout)
         }
     }

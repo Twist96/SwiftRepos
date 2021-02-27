@@ -9,14 +9,14 @@ import SwiftUI
 import CoreData
 import Apollo
 
-let gitToken = "a56e62f01f6d2d28c9fa2c00f15e07ff6fa879d9"
+let gitToken = "e50c54c2938b047305de4f6e0999d6515157d846"
 
 struct HomeView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     @StateObject var viewModel = HomeViewModel()
     @FetchRequest(entity: Repository.entity(),
-                  sortDescriptors: [])
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stargazerCount, ascending: false)])
         var repositories: FetchedResults<Repository>
     
     
@@ -27,7 +27,7 @@ struct HomeView: View {
                 case .loading:
                     Text("Loading...")
                 case .error(let error):
-                    ErrorPageView(errorMessage: error.localizedDescription)
+                    ErrorPageView(errorMessage: error)
                 case .success:
                     repositoryListView
                 }

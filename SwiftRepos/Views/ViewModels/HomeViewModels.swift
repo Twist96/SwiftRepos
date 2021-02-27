@@ -8,10 +8,11 @@
 import Foundation
 import Combine
 import CoreData
+import Apollo
 
 class HomeViewModel: ObservableObject{
     @Published var appState: ScreenState = .loading
-    @Published var databaseHasData = true
+    @Published var databaseHasData = false
     @Published var showToast = false
     @Published var toastMessage = ""
     
@@ -45,7 +46,6 @@ class HomeViewModel: ObservableObject{
                 switch result{
                 case .success(let result):
                     if let errors = result.errors{
-                        print(errors.first.debugDescription)
                         handleError(errors.first!)
                         
                     }
@@ -53,10 +53,9 @@ class HomeViewModel: ObservableObject{
                         self.hasNext = result.data!.search.pageInfo.hasNextPage
                         self.lastRepositoryCusor = result.data!.search.pageInfo.endCursor
                         self.saveAllRepositories(repos, dataController: dataController, manageContext: manageContext)
+                        appState = .success
                     }
-                    appState = .success
                 case .failure(let error):
-                    print(error.localizedDescription)
                     handleError(error)
                 }
             }
@@ -72,7 +71,7 @@ class HomeViewModel: ObservableObject{
             toastMessage = "Failed to fetch new Data: " + error.localizedDescription
             showToast = true
         }else{
-            appState = .error(error)
+            appState = .error(error.localizedDescription)
         }
     }
     

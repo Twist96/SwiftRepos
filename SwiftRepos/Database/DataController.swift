@@ -11,7 +11,6 @@ import CoreData
 class DataController:ObservableObject{
     
     let container: NSPersistentContainer
-    static let instance = DataController()
     private var dbStoreURL: URL? = nil
     private var dbStoreType: String? = nil
     
@@ -29,6 +28,7 @@ class DataController:ObservableObject{
             self.dbStoreURL = storeDescription.url
             self.dbStoreType = storeDescription.type
         }
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     
