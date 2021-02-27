@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 import Apollo
 
-let gitToken = "e50c54c2938b047305de4f6e0999d6515157d846"
+let gitToken = "1a9b7fbe4739103b2075122e45413003607cd44e"
 
 struct HomeView: View {
     @EnvironmentObject var dataController: DataController

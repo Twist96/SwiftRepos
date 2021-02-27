@@ -52,6 +52,15 @@ class DataController:ObservableObject{
         do{
             
             try container.persistentStoreCoordinator.destroyPersistentStore(at: dbStoreURL!, ofType: dbStoreType!)
+            container.loadPersistentStores { (storeDescription, error) in
+                if let error = error{
+                    fatalError("Fatal error loading store: \(error.localizedDescription)")
+                }
+                self.dbStoreURL = storeDescription.url
+                self.dbStoreType = storeDescription.type
+            }
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
         }catch{
             print(error.localizedDescription)
         }

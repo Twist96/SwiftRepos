@@ -87,7 +87,7 @@ class HomeViewModel: ObservableObject{
                       manageContext: NSManagedObjectContext){
         if refreshId == nil {
             ///Clear database
-            dataController.deleteAll()
+            dataController.deletePersistantStore()
             ///Wait for three seconds to allow delete operation end before adding new data.
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
                 convertToRepositoryAndSave(graphQLRepo, dataController: dataController, manageContext: manageContext)
