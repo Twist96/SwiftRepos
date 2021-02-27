@@ -2,10 +2,10 @@ query SearchRepository($query: String!, $type: SearchType!, $first: Int $after: 
 	search(query: $query, type: $type, first: $first, after: $after) {
 		repositoryCount
 		pageInfo{
-			  hasNextPage
-			}
+			hasNextPage
+			endCursor
+		}
 		edges {
-			cursor
 			node {
 				... on Repository {
 					id

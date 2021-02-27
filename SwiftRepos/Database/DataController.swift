@@ -31,17 +31,6 @@ class DataController:ObservableObject{
         }
     }
     
-    static var preview: DataController = {
-       let dataController = DataController()
-        
-//        do{
-//            try dataController.createSampleData()
-//        }catch{
-//            fatalError("Fatel error creating preview: \(error.localizedDescription)")
-//        }
-        
-        return dataController
-    }()
     
     func save() {
         if container.viewContext.hasChanges{
@@ -66,15 +55,6 @@ class DataController:ObservableObject{
         }catch{
             print(error.localizedDescription)
         }
-    }
-    
-    func dummyRepo(){
-        let repository = Repository(context: container.viewContext)
-        repository.id = "123abc"
-        repository.name = "Tommys Repo"
-        repository.owner = "Tommy Udoka"
-        repository.stargazerCount = 22012
-        repository.forkCount = 3613
     }
     
 }

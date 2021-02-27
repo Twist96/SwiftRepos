@@ -8,6 +8,7 @@
 import Foundation
 import Apollo
 
+
 class ApolloNetwork{
     static let instance = ApolloNetwork()
     private(set) lazy var apollo: ApolloClient = {
@@ -28,6 +29,8 @@ class ApolloNetwork{
         }
     }
 
+    
+    /// Custom Interceptor to accommodate Headers
     class CustomInterceptor: ApolloInterceptor {        
         func interceptAsync<Operation: GraphQLOperation>(
             chain: RequestChain,

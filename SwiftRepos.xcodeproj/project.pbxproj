@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE74628925EA172C00B1FF27 /* ScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74628825EA172C00B1FF27 /* ScreenState.swift */; };
+		CE74628D25EA196900B1FF27 /* ErrorPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74628C25EA196900B1FF27 /* ErrorPageView.swift */; };
+		CE74629125EA1C4600B1FF27 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74629025EA1C4600B1FF27 /* ToastView.swift */; };
 		CE96BC8A25E82A6A003FA3AA /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC8825E82A6A003FA3AA /* Main.xcdatamodeld */; };
 		CE96BC8D25E82A92003FA3AA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96BC8C25E82A92003FA3AA /* DataController.swift */; };
 		CE97062625E6AA18005788AD /* SwiftReposApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97062525E6AA18005788AD /* SwiftReposApp.swift */; };
-		CE97062825E6AA18005788AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97062725E6AA18005788AD /* ContentView.swift */; };
 		CE97062A25E6AA19005788AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE97062925E6AA19005788AD /* Assets.xcassets */; };
 		CE97062D25E6AA19005788AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE97062C25E6AA19005788AD /* Preview Assets.xcassets */; };
 		CE97063725E6AA59005788AD /* ApolloQueries.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97063625E6AA59005788AD /* ApolloQueries.swift */; };
@@ -26,11 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE74628825EA172C00B1FF27 /* ScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenState.swift; sourceTree = "<group>"; };
+		CE74628C25EA196900B1FF27 /* ErrorPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPageView.swift; sourceTree = "<group>"; };
+		CE74629025EA1C4600B1FF27 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		CE96BC8925E82A6A003FA3AA /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		CE96BC8C25E82A92003FA3AA /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CE97062225E6AA18005788AD /* SwiftRepos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftRepos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE97062525E6AA18005788AD /* SwiftReposApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReposApp.swift; sourceTree = "<group>"; };
-		CE97062725E6AA18005788AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE97062925E6AA19005788AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE97062C25E6AA19005788AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE97062E25E6AA19005788AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE74628725EA170D00B1FF27 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				CE74628825EA172C00B1FF27 /* ScreenState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		CE74628F25EA1C2F00B1FF27 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CE74629025EA1C4600B1FF27 /* ToastView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		CE96BC8725E829A8003FA3AA /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,13 +105,14 @@
 		CE97062425E6AA18005788AD /* SwiftRepos */ = {
 			isa = PBXGroup;
 			children = (
+				CE74628F25EA1C2F00B1FF27 /* Component */,
+				CE74628725EA170D00B1FF27 /* State */,
 				CE96BC8725E829A8003FA3AA /* Database */,
 				CE97065425E6F930005788AD /* Models */,
 				CE97064C25E6DA8A005788AD /* Items */,
 				CE97064B25E6DA51005788AD /* Views */,
 				CE97063525E6AA31005788AD /* GraphQL */,
 				CE97062525E6AA18005788AD /* SwiftReposApp.swift */,
-				CE97062725E6AA18005788AD /* ContentView.swift */,
 				CE97062925E6AA19005788AD /* Assets.xcassets */,
 				CE97062E25E6AA19005788AD /* Info.plist */,
 				CE97062B25E6AA19005788AD /* Preview Content */,
@@ -123,6 +144,7 @@
 			children = (
 				CEA5AEFF25E7C00F009031C2 /* ViewModels */,
 				CE97065125E6DF2D005788AD /* HomeView.swift */,
+				CE74628C25EA196900B1FF27 /* ErrorPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,10 +275,12 @@
 			files = (
 				CE96BC8A25E82A6A003FA3AA /* Main.xcdatamodeld in Sources */,
 				CE97065625E6F955005788AD /* Repository.swift in Sources */,
-				CE97062825E6AA18005788AD /* ContentView.swift in Sources */,
 				CE97062625E6AA18005788AD /* SwiftReposApp.swift in Sources */,
+				CE74628D25EA196900B1FF27 /* ErrorPageView.swift in Sources */,
 				CE97064E25E6DAB0005788AD /* RepositoryItem.swift in Sources */,
 				CE96BC8D25E82A92003FA3AA /* DataController.swift in Sources */,
+				CE74629125EA1C4600B1FF27 /* ToastView.swift in Sources */,
+				CE74628925EA172C00B1FF27 /* ScreenState.swift in Sources */,
 				CE97065225E6DF2D005788AD /* HomeView.swift in Sources */,
 				CE97064925E6B3A2005788AD /* API.swift in Sources */,
 				CE97063725E6AA59005788AD /* ApolloQueries.swift in Sources */,
