@@ -15,6 +15,8 @@ class HomeViewModel: ObservableObject{
     @Published var databaseHasData = false
     @Published var showToast = false
     @Published var toastMessage = ""
+    @Published var repos: [MRepository] = []
+    var cancelBag = Set<AnyCancellable>()
     
     ///LastRepositoryCusor tells the server how to offset data. If nil server will return first set of data
     var lastRepositoryCusor: String? = nil
@@ -24,6 +26,25 @@ class HomeViewModel: ObservableObject{
     
     /// hasNext indicates if there's still more Repositories to fetch from saver
     var hasNext: Bool = true
+    
+    init() {
+        let dataController = DataController()
+        let localRepo = RepoLocalStore(dataController: dataController, managedContext: dataController.container.viewContext)
+        let graphQLRepo = RepoGraphQLStore()
+        let repository = RepoRepository(repoLocalStore: localRepo, repoGraphQLStore: graphQLRepo)
+        repository.repos.sink { (complition) in
+            switch complition{
+            case .finished:
+                print("finished")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        } receiveValue: { (repos) in
+            print(repos.count)
+        }
+        .store(in: &cancelBag)
+
+    }
     
     
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2FF3A625FA6D2600DA7D39 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF3A525FA6D2600DA7D39 /* RepoRepository.swift */; };
+		CE2FF3AA25FA850F00DA7D39 /* RepoGraphQLStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF3A925FA850F00DA7D39 /* RepoGraphQLStore.swift */; };
+		CE2FF3AD25FABACF00DA7D39 /* RepoLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2FF3AC25FABACF00DA7D39 /* RepoLocalStore.swift */; };
 		CE74628925EA172C00B1FF27 /* ScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74628825EA172C00B1FF27 /* ScreenState.swift */; };
 		CE74628D25EA196900B1FF27 /* ErrorPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74628C25EA196900B1FF27 /* ErrorPageView.swift */; };
 		CE74629125EA1C4600B1FF27 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE74629025EA1C4600B1FF27 /* ToastView.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE2FF3A525FA6D2600DA7D39 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
+		CE2FF3A925FA850F00DA7D39 /* RepoGraphQLStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGraphQLStore.swift; sourceTree = "<group>"; };
+		CE2FF3AC25FABACF00DA7D39 /* RepoLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoLocalStore.swift; sourceTree = "<group>"; };
 		CE74628825EA172C00B1FF27 /* ScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenState.swift; sourceTree = "<group>"; };
 		CE74628C25EA196900B1FF27 /* ErrorPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPageView.swift; sourceTree = "<group>"; };
 		CE74629025EA1C4600B1FF27 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -61,6 +67,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE2FF3A425FA6CFC00DA7D39 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CE2FF3A525FA6D2600DA7D39 /* RepoRepository.swift */,
+				CE2FF3A925FA850F00DA7D39 /* RepoGraphQLStore.swift */,
+				CE2FF3AC25FABACF00DA7D39 /* RepoLocalStore.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		CE74628725EA170D00B1FF27 /* State */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +121,7 @@
 		CE97062425E6AA18005788AD /* SwiftRepos */ = {
 			isa = PBXGroup;
 			children = (
+				CE2FF3A425FA6CFC00DA7D39 /* Repository */,
 				CE74628F25EA1C2F00B1FF27 /* Component */,
 				CE74628725EA170D00B1FF27 /* State */,
 				CE96BC8725E829A8003FA3AA /* Database */,
@@ -277,10 +294,13 @@
 				CE97065625E6F955005788AD /* Repository.swift in Sources */,
 				CE97062625E6AA18005788AD /* SwiftReposApp.swift in Sources */,
 				CE74628D25EA196900B1FF27 /* ErrorPageView.swift in Sources */,
+				CE2FF3A625FA6D2600DA7D39 /* RepoRepository.swift in Sources */,
 				CE97064E25E6DAB0005788AD /* RepositoryItem.swift in Sources */,
 				CE96BC8D25E82A92003FA3AA /* DataController.swift in Sources */,
 				CE74629125EA1C4600B1FF27 /* ToastView.swift in Sources */,
+				CE2FF3AD25FABACF00DA7D39 /* RepoLocalStore.swift in Sources */,
 				CE74628925EA172C00B1FF27 /* ScreenState.swift in Sources */,
+				CE2FF3AA25FA850F00DA7D39 /* RepoGraphQLStore.swift in Sources */,
 				CE97065225E6DF2D005788AD /* HomeView.swift in Sources */,
 				CE97064925E6B3A2005788AD /* API.swift in Sources */,
 				CE97063725E6AA59005788AD /* ApolloQueries.swift in Sources */,
